@@ -14,7 +14,7 @@ namespace Lab_7
             private string _name;
             private int _money;
             private Participant[] _rivals;
-            private int _number_of_pipl;
+            
 
             public string Name => _name;
             public int Bank => _money;
@@ -27,26 +27,27 @@ namespace Lab_7
                 _name = name;
                 _money = money;
                 _rivals = new Participant[0];
-                _number_of_pipl = 0;
+                
             }
 
             ////
-            public void Add(Participant rival)
+            public void Add(Participant rival)//rewritten
             {
-                if (_rivals == null || _rivals.Length == 0) return;
-                if (_number_of_pipl >= _rivals.Length) return;
-                else { _rivals[_number_of_pipl] = rival; _number_of_pipl++; }
-            }
-            public void Add(Participant[] rivals) 
-            {
-                if (rivals == null || _rivals == null || rivals.Length == 0) return;
-                int counter = 0;
-                while (_number_of_pipl < _rivals.Length && counter < rivals.Length)
-                {
-                    _rivals[_number_of_pipl] = rivals[counter];
-                    _number_of_pipl++;
-                    counter++;
+                if (_rivals == null) return;//
+                var newarrayrivals=new Participant[_rivals.Length+1];
+                for (int i = 0; i < _rivals.Length; i++) 
+                { 
+                    newarrayrivals[i]=_rivals[i];
                 }
+                newarrayrivals[_rivals.Length] = rival;
+                _rivals=newarrayrivals;
+                
+            }
+            public void Add(Participant[] rivals) //rewritten
+            {
+                if (rivals == null || _rivals == null) return;
+                foreach ( var rival in rivals ) {Add(rival);}
+                
             }
           
         }

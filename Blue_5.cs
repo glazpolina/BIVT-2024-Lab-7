@@ -54,14 +54,17 @@ namespace Lab_7
                     int total = 0;
                     for (int i = 0; i < _sportsman.Length; i++)
                     {
-                        switch (_sportsman[i].Place)
+                        if (_sportsman[i] != null)
                         {
-                            case 1: total += 5; break;
-                            case 2: total += 4; break;
-                            case 3: total += 3; break;
-                            case 4: total += 2; break;
-                            case 5: total += 1; break;
-                            default: break;
+                            switch (_sportsman[i].Place)
+                            {
+                                case 1: total += 5; break;
+                                case 2: total += 4; break;
+                                case 3: total += 3; break;
+                                case 4: total += 2; break;
+                                case 5: total += 1; break;
+                                default: break;
+                            }
                         }
                     }
                     return total;
@@ -72,7 +75,7 @@ namespace Lab_7
             {
                 get
                 {
-                    if (_sportsman == null) return 0;///
+                    if (_sportsman == null) return 0;
                     int best = 18;
                     for (int i = 0; i < _sportsman.Length; i++)
                     {
@@ -82,13 +85,15 @@ namespace Lab_7
                 }
             }
             protected abstract double GetTeamStrength();
-            public static Team GetChampion(Team[] teams)///
+            public static Team GetChampion(Team[] teams)
             {
                 //чемпион среди и тех и тех, возвращает команду-чемпиона
                 if (teams == null || teams.Length == 0) return null;
                 Team champ = null;//champion team
-
-                double max_of_strength = teams[0].GetTeamStrength();
+                double max_of_strength;
+                //double max_of_strength = teams[0].GetTeamStrength();//doesn't work in case teams[0] is nonexistent
+                if (teams[0] != null) max_of_strength = teams[0].GetTeamStrength();
+                else max_of_strength = double.MinValue;
 
                 foreach (Team team in teams)
                 {
@@ -114,7 +119,7 @@ namespace Lab_7
 
             public void Add(Sportsman newsportsman)
             {
-                if (_sportsman == null) return;///
+                if (_sportsman == null || newsportsman==null) return;///
                 if (_counter < _sportsman.Length)
                 {
                     _sportsman[_counter++] = newsportsman;

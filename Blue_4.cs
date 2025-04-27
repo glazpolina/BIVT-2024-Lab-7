@@ -98,6 +98,7 @@ namespace Lab_7
             public void Add(Team team)
             {
                 if (_man == null || _woman == null) return;
+                if (team == null) return;
                 if (_man_count >= 12) return;
                 if (_woman_count >= 12) return;
                 if (team is ManTeam tea) { _man[_man_count++] = tea; }
@@ -106,11 +107,11 @@ namespace Lab_7
 
             public void Add(Team[] teams)///
             {
-                if (_man == null || _woman==null) return;
+                if (teams==null || _man == null || _woman==null || teams.Length==0) return;
                 //
                 foreach(Team t in teams)
                 {
-                    Add(t);
+                    if(t!=null) Add(t);
                 }
             }
 
@@ -122,7 +123,7 @@ namespace Lab_7
             }
             private void Sortsep(Team[] t)///sort mass separately
             {
-                if (t == null) return;
+                if (t == null || t.Length==0) return;
                 for (int i = 1, j = 2; i < t.Length;)
                 {
                     if (i == 0 || t[i].TotalScore <= t[i - 1].TotalScore) { i = j; j++; }
@@ -148,9 +149,10 @@ namespace Lab_7
             private static Team[] Merge_an_Array(Team[] group1, Team[] group2,int size)
             {
                 Team[] merged_array = new Team[size];
+                if (group1 == null || group2 == null) return null;
                 int i = 0, j = 0;
                 int q = 0;
-                while (i < size / 2 && j < size / 2)////
+                while (group1[i]!=null&&group2[j]!=null&&i < size / 2 && j < size / 2)////
                 {
                     if (group1[i].TotalScore >= group2[j].TotalScore)
                     {
