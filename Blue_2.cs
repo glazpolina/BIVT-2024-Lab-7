@@ -84,7 +84,7 @@ namespace Lab_7
                     double[] money_for_prizetakers = new double[middle];
                     for(int i = 0; i < middle; i++)
                     {
-                        money_for_prizetakers[i] = this.Bank * middle / 100;
+                        money_for_prizetakers[i] = this.Bank * 20.0/ middle / 100;
                     }
                     money_for_prizetakers[0] += 0.4 * this.Bank;//additional to 1st
                     money_for_prizetakers[1] += 0.25 * this.Bank;//additional to 2nd

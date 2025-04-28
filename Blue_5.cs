@@ -79,7 +79,10 @@ namespace Lab_7
                     int best = 18;
                     for (int i = 0; i < _sportsman.Length; i++)
                     {
-                        if ((_sportsman[i].Place < best) && (_sportsman[i].Place > 0)) best = _sportsman[i].Place;//
+                        if (_sportsman[i] != null)
+                        {
+                            if ((_sportsman[i].Place < best) && (_sportsman[i].Place > 0)) { best = _sportsman[i].Place; }
+                        }
                     }
                     return best;
                 }

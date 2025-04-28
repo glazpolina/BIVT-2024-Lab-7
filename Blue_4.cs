@@ -97,12 +97,12 @@ namespace Lab_7
 
             public void Add(Team team)
             {
-                if (_man == null || _woman == null) return;
-                if (team == null) return;
-                if (_man_count >= 12) return;
-                if (_woman_count >= 12) return;
-                if (team is ManTeam tea) { _man[_man_count++] = tea; }
-                else if (team is WomanTeam te) { _woman[_woman_count++] = te; }
+                //if (_man == null || _woman == null) return;
+                if (team == null) return;//
+                //if (_man_count >= 12) return;
+                //if (_woman_count >= 12) return;
+                if (team is ManTeam tea && _man!= null && _man_count < 12) { _man[_man_count++] = tea; }
+                else if (team is WomanTeam te && _woman != null && _woman_count < 12) { _woman[_woman_count++] = te; }
             }
 
             public void Add(Team[] teams)///
