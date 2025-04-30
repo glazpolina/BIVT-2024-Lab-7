@@ -95,9 +95,9 @@ namespace Lab_7
                 Team champ = null;//champion team
                 double max_of_strength;
                 //double max_of_strength = teams[0].GetTeamStrength();//doesn't work in case teams[0] is nonexistent
-                if (teams[0] != null) max_of_strength = teams[0].GetTeamStrength();
-                else max_of_strength = double.MinValue;
-
+                /*if (teams[0] != null) max_of_strength = teams[0].GetTeamStrength();
+                else max_of_strength = double.MinValue;*/
+                max_of_strength = double.MinValue;
                 foreach (Team team in teams)
                 {
                     if (team == null) continue;
@@ -169,14 +169,14 @@ namespace Lab_7
             public ManTeam(string name) : base(name) { }
             protected override double GetTeamStrength()
             {
-                //сила-это 100 умн на среднее значение мест
+                //сила-это 100 дел на среднее значение мест
                 if (Sportsmen == null || Sportsmen.Length == 0) return 0;
                 double strength = 0;
                 double sum_of_places = 0, number_of_participants = 0;
                 
                 foreach (Sportsman sportsman in Sportsmen)
                 {
-                    if (sportsman.Place > 0 && sportsman != null)
+                    if (sportsman != null&&sportsman.Place > 0)
                     {
                         sum_of_places += sportsman.Place;
                        
@@ -185,7 +185,7 @@ namespace Lab_7
                     }
                 }
                 if (number_of_participants == 0) return 0;//그
-                strength = 100 * (sum_of_places / number_of_participants);
+                strength = 100 / (sum_of_places / number_of_participants);//here
                 return strength;
             }
         }
@@ -209,6 +209,7 @@ namespace Lab_7
 
                     }
                 }
+                if(product_of_places == 0) return 0;//just in case
                 strength = 100 * sum_of_places * number_of_participants / product_of_places;
                 return strength;
             }
